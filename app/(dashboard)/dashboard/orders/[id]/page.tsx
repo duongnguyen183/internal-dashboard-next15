@@ -14,15 +14,29 @@ type Order = {
   createdAt: string;
 };
 
+function getBaseUrlFromHeaders(h: Headers) {
+  // Works on Vercel / proxies too
+  const xfProto = h.get("x-forwarded-proto");
+  const xfHost = h.get("x-forwarded-host");
+  const host = xfHost ?? h.get("host");
+
+  if (!host) return null;
+
+  const proto =
+    xfProto ?? (process.env.NODE_ENV === "development" ? "http" : "https");
+
+  return `${proto}://${host}`;
+}
+
 async function fetchOrderById(id: string): Promise<Order> {
   const h = await headers();
-  const host = h.get("host");
-  const proto = process.env.NODE_ENV === "development" ? "http" : "https";
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? `${proto}://${host}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? getBaseUrlFromHeaders(h);
 
-  const res = await fetch(`${baseUrl}/api/orders/${encodeURIComponent(id)}`, {
-    cache: "no-store",
-  });
+  const url = baseUrl
+    ? `${baseUrl}/api/orders/${encodeURIComponent(id)}`
+    : `/api/orders/${encodeURIComponent(id)}`;
+
+  const res = await fetch(url, { cache: "no-store" });
 
   if (res.status === 404) notFound();
   if (!res.ok) throw new Error(`Failed to fetch order (${res.status})`);

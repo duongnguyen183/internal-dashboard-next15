@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const response = NextResponse.json({
-    message: "Login success",
-  });
+  const res = NextResponse.json({ success: true });
 
-  response.cookies.set("token", "fake-token", {
-    httpOnly: true,
+  res.cookies.set("auth", "true", {
     path: "/",
+    httpOnly: false, // demo project
   });
 
-  return response;
+  return res;
 }

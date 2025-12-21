@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function DashboardPage() {
   return (
     <div className="space-y-5">
@@ -10,7 +12,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex gap-2">
-          <a
+          <Link
             href="/dashboard/orders"
             className="inline-flex rounded-xl px-4 py-2 text-sm font-medium text-white transition hover:brightness-[1.03]"
             style={{
@@ -19,13 +21,14 @@ export default function DashboardPage() {
             }}
           >
             Go to Orders
-          </a>
-          <a
-            href="/dashboard/orders"
-            className="inline-flex rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-white transition"
+          </Link>
+
+          <Link
+            href="/dashboard/orders/new"
+            className="inline-flex rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-white"
           >
             Create Order
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -90,22 +93,24 @@ export default function DashboardPage() {
           <div className="mt-4 space-y-2">
             <a
               href="/dashboard/orders"
-              className="block rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-white transition"
+              className="block rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-white"
             >
               View all orders
             </a>
+
             <a
-              href="/dashboard/orders"
-              className="block rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-white transition"
+              href="/dashboard/orders/new"
+              className="block rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-white"
             >
               Create new order
             </a>
-            <a
-              href="/dashboard/orders"
-              className="block rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-white transition"
+
+            <span
+              className="block cursor-not-allowed rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-medium text-slate-500"
+              title="Coming soon"
             >
               Export (coming soon)
-            </a>
+            </span>
           </div>
 
           <div className="mt-4 rounded-xl border border-slate-200 bg-white/70 p-3 text-xs text-slate-600">

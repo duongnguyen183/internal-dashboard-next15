@@ -101,28 +101,30 @@ export default function OrderEditorClient({
             Customer
           </label>
           <input
-            className="d-input mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-4 focus:ring-indigo-200/40"
+            className="d-input mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-4 focus:ring-indigo-200/40"
             value={customer}
             onChange={(e) => setCustomer(e.target.value)}
             disabled={saving}
+            placeholder="e.g. Alice"
           />
         </div>
 
         <div>
           <label className="text-sm font-semibold text-slate-700">Amount</label>
           <input
-            className="d-input mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-4 focus:ring-indigo-200/40"
+            className="d-input mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:ring-4 focus:ring-indigo-200/40"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             inputMode="decimal"
             disabled={saving}
+            placeholder="e.g. 50"
           />
         </div>
 
         <div>
           <label className="text-sm font-semibold text-slate-700">Status</label>
           <select
-            className="d-select not-only:mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-4 focus:ring-indigo-200/40"
+            className="d-select mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:ring-4 focus:ring-indigo-200/40"
             value={status}
             onChange={(e) => setStatus(e.target.value as OrderStatus)}
             disabled={saving}
