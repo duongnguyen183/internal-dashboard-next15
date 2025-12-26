@@ -3,6 +3,11 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Dashboard | Internal Dashboard",
+  description: "Internal business management dashboard (demo).",
+};
+
 export default async function DashboardLayout({
   children,
 }: {

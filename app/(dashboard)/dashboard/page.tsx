@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Overview | Internal Dashboard",
+  description: "Dashboard overview page.",
+};
+
 export default function DashboardPage() {
   return (
     <div className="space-y-5">

@@ -1,60 +1,59 @@
-# Internal Dashboard (Next.js 15)
+# Internal Dashboard (Next.js)
 
-Internal dashboard demo application built with **Next.js 15** to practice real-world development patterns such as routing, CRUD, API Routes, and responsive UI.
+Demo internal dashboard to showcase routing, CRUD, loading/error states, and cookie-based auth.
 
-This project is created as a **learning & evaluation project** to reach practical working-level skills with Next.js.
+## Tech stack
 
----
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Route Handlers (API)
 
-## 1. Overview
+## Features
 
-The application simulates a simple **internal order management system**, allowing users to:
+- Login / Logout (demo cookie auth)
+- Dashboard layout with sidebar + topbar
+- Orders CRUD:
+  - List + search + pagination
+  - Create new order
+  - Order detail + edit
+  - Delete
+- Loading / error states
 
-- View a list of orders
-- Create, edit, and delete orders
-- Navigate to order detail pages
-- Experience loading, error, and empty states
+## Routing
 
----
+- Public
+  - `/` (public home)
+  - `/login`
+- Protected (requires cookie `auth=true`)
+  - `/dashboard`
+  - `/dashboard/orders`
+  - `/dashboard/orders/new`
+  - `/dashboard/orders/[id]`
 
-## 2. Tech Stack
+## Auth flow (demo)
 
-- **Next.js 15** (App Router)
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **API Routes (Route Handlers)**
-- **Vercel** (deployment)
+- Login page calls `POST /api/auth` → sets cookie `auth=true`
+- Dashboard layout checks cookie via `cookies()` and redirects to `/login` if missing
+- Logout uses `/api/auth/logout` to clear cookie
 
----
+## SSR vs Client Components
 
-## 3. Features
+- Dashboard layout / pages are Server Components by default
+- Orders list page uses `"use client"` because it needs interactivity (search, modal, optimistic UI)
+- Order detail page fetches data on server and passes to `OrderEditorClient` (client) for editing
 
-- CRUD operations for orders
-- Pagination & search
-- Dynamic routing (`/dashboard/orders/[id]`)
-- Client & Server Components
-- API Routes for data handling
-- Loading & error states
-- Responsive UI (desktop & mobile)
-- Toast notification & confirm modal
+## API design
 
----
+- `GET /api/orders?q=&page=&limit=` list orders
+- `POST /api/orders` create order
+- `GET /api/orders/[id]` get one order (supports internal id or OD-xxxx)
+- `PUT /api/orders/[id]` update
+- `DELETE /api/orders/[id]` delete
 
-## 4. Routing Structure
+## Development
 
-```txt
-app/
-├─ (dashboard)/
-│  └─ dashboard/
-│     ├─ orders/
-│     │  ├─ page.tsx          # Order list
-│     │  └─ [id]/
-│     │     └─ page.tsx       # Order detail
-│     └─ layout.tsx
-├─ api/
-│  └─ orders/
-│     ├─ route.ts             # GET / POST
-│     └─ [id]/
-│        └─ route.ts          # GET / PUT / DELETE
+```bash
+npm install
+npm run dev
 ```

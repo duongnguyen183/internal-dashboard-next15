@@ -3,6 +3,13 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Orders | Internal Dashboard",
+  description: "Manage internal orders (CRUD, pagination, search).",
+};
+
 type OrderStatus = "Pending" | "Paid" | "Cancelled";
 
 type Order = {

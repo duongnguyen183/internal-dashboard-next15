@@ -3,6 +3,11 @@ import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import OrderEditorClient from "./OrderEditorClient";
 
+export const metadata = {
+  title: "Order detail | Internal Dashboard",
+  description: "View and edit an order.",
+};
+
 type OrderStatus = "Pending" | "Paid" | "Cancelled";
 
 type Order = {
